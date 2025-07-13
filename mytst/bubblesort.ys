@@ -1,0 +1,110 @@
+	.pos 0
+        #TODO
+    # Initialize %rsp to stack (an address).
+    # By convention, the first two parameters are passed
+        # in %rdi and %rsi.
+    # Initialize %rdi to list.
+        # Initialize %rsi to mem[count].
+        #
+	# Call your sort function and halt after returning from function.
+	# In the final dump, the list should be sorted.
+
+    irmovq stack, %rsp
+	irmovq list, %rdi
+	irmovq count, %rsi
+    call sort
+	halt
+
+sort:   #sort(list, count)
+	# Sorts the list in memory
+	# %rdi is list: the address of the first element in the list
+    # %rsi is count: the number of elements in the list
+	#TODO
+	# call a bubble function count times
+	# After each call, one element will be guaranteed to
+	# be in the correct position. For example, after first call
+	# the max element is in the right position (the end). After
+	# the second call, the second largest element is in the correct
+	# position, etc. 
+	# Use a loop.
+	# Return when done.
+
+	pushq %rbp           
+    rrmovq %rsp, %rbp    
+    irmovq $1, %rax      
+
+sort_loop:
+    mrmovq 0(%rbp), %rcx 
+    subq %rax, %rcx      
+    jle sort_done        
+
+    pushq %rax           
+    call bubble          
+    popq %rax            
+    addq $1, %rax        
+    jmp sort_loop        
+
+
+bubble: #bubble(list, count)
+	# Compares two adjacent elements in the list and switches them 
+	# if the one at the lower address is larger than the one at the
+	# higher address.  
+        # %rdi is list: the address of the first element in the list
+        # %rsi is count: the number of elements in the list
+        #
+	#TODO:
+	# Get two adjacent elements out of memory
+	# Swap them if they are out of order
+	# Continue until the end of the list.	
+        # Return when done.
+
+	pushq %rbp           
+    rrmovq %rsp, %rbp    
+    irmovq $0, %rax      
+
+bubble_loop:
+    mrmovq 0(%rbp), %rcx 
+    subq $1, %rcx        
+    subq %rax, %rcx      
+    jle bubble_done      
+
+    rrmovq %rdi, %rdx    
+    addq %rax, %rdx      
+    mrmovq 0(%rdx), %rbx 
+    mrmovq 8(%rdx), %rcx 
+    subq %rbx, %rcx      
+    jge bubble_skip      
+
+    # Swap the elements
+    rmmovq %rcx, 0(%rdx) 
+    rmmovq %rbx, 8(%rdx) 
+
+bubble_skip:
+    addq $8, %rax        
+    jmp bubble_loop      
+
+bubble_done:
+    popq %rbp            
+    ret                  
+
+	# The data
+	.pos 0x200	
+count:  .quad 0xf
+list:	.quad 0x24
+	.quad 0x4
+	.quad 0xfffffffffffffff0
+	.quad 0x37
+	.quad 0x42
+	.quad 0xffffffffffffffff
+        .quad 0xa0
+        .quad 0xa9
+        .quad 0x29
+	.quad 0x900a
+	.quad 0x1000b
+	.quad 0x12000
+	.quad 0x10040
+	.quad 0xf000b
+	.quad 0x100
+
+	.pos 0x400
+stack:  .quad 0

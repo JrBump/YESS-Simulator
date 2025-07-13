@@ -1,0 +1,144 @@
+        .pos 0
+#initialize %rax to 0
+#initialize another register to the address of the first number
+
+
+#For each number:  
+#Get the number out of memory.
+#Cause the condition codes to be modified based upon value of the number.
+#Add the number to %rax if it is negative.
+#
+#You'll have the same basic code for each of the six numbers since
+#we don't have any loops.
+
+
+
+
+#finally store %rax in memory location result
+       irmovq result, %rsi 
+       rmmovq %rax, (%rsi)
+#
+        halt
+        .align 8
+result: .quad 0     #should be -30 = 0xffffffffffffffe2 at end
+nums:   .quad 11
+        .quad -23
+        .quad 0
+        .quad 15
+        .quad -3
+        .quad -4
+
+        .pos 0
+#initialize %rax to 0
+        xorq %rax, %rax
+#initialize another register to the address of the first number
+        irmovq nums, %rcx
+
+#For each number:  
+#Get the number out of memory.
+#Cause the condition codes to be modified based upon value of the number.
+#Add the number to %rax if it is negative.
+#
+#You'll have the same basic code for each of the six numbers since
+#we don't have any loops.
+
+        irmovq 0x8000000000000000, %r14
+
+        mrmovq 0(%rcx), %rdx
+        nop
+        nop
+        nop
+        andq %r14, %rdx
+        nop
+        nop
+        nop
+        cmovl %rdx, %rdi
+        nop
+        nop
+        nop
+        addq %rdi, %rax
+
+        mrmovq 8(%rcx), %rdx
+        nop
+        nop
+        nop
+        andq %r14, %rdx
+        nop
+        nop
+        nop
+        cmovl %rdx, %rdi
+        nop
+        nop
+        nop
+        addq %rdi, %rax
+
+        mrmovq 16(%rcx), %rdx
+        nop
+        nop
+        nop
+        andq %r14, %rdx
+        nop
+        nop
+        nop
+        cmovl %rdx, %rdi
+        nop
+        nop
+        nop
+        addq %rdi, %rax
+
+        mrmovq 24(%rcx), %rdx
+        nop
+        nop
+        nop
+        andq %r14, %rdx
+        nop
+        nop
+        nop
+        cmovl %rdx, %rdi
+        nop
+        nop
+        nop
+        addq %rdi, %rax
+
+        mrmovq 32(%rcx), %rdx
+        nop
+        nop
+        nop
+        andq %r14, %rdx
+        nop
+        nop
+        nop
+        cmovl %rdx, %rdi
+        nop
+        nop
+        nop
+        addq %rdi, %rax
+
+        mrmovq 40(%rcx), %rdx
+        nop
+        nop
+        nop
+        andq %r14, %rdx
+        nop
+        nop
+        nop
+        cmovl %rdx, %rdi
+        nop
+        nop
+        nop
+        addq %rdi, %rax
+
+#finally store %rax in memory location result
+       irmovq result, %rsi 
+       rmmovq %rax, (%rsi)
+#
+        halt
+        .align 8
+result: .quad 0     #should be -30 = 0xffffffffffffffe2  at end
+nums:   .quad 11
+        .quad -23
+        .quad 0
+        .quad 15
+        .quad -3
+        .quad -4
+

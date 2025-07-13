@@ -1,0 +1,41 @@
+	.pos 0
+	#TODO
+        # Initialize %rsp to stack (an address).
+	#
+        # By convention, the first two parameters are passed
+        # in %rdi and %rsi.
+        # Initialize %rdi to list.
+        # Initialize %rsi to mem[count].
+        #
+        # Call your function and halt after returning from function.
+	# You should see in the final dump that the list is reversed.
+
+reverse:#reverse(list, count)
+	# %rdi is list: the address of the first element in the list
+        # %rsi is count: the number of elements in the list	
+	#TODO
+	# calculate the address of the last number in the list
+	# using %rdi and %rsi and another register to store the result
+	# The expression is: %rdi + 8*%rsi - 8 but you'll need to do
+	# it without a multiply instruction since there isn't one
+	#
+	# Reverse first and last, second and second to last, etc.
+	# Use a loop.
+	# Return when done.
+
+	# The data
+	.pos 0x200
+count:	.quad 11
+list:	.quad 5
+	.quad 6
+	.quad 7
+	.quad 8
+	.quad 9
+	.quad 10
+	.quad 11
+	.quad 12
+	.quad 13
+	.quad 14
+	.quad 15
+	.pos 0x300
+stack:  .quad 0

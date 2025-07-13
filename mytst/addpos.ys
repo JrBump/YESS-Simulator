@@ -1,0 +1,38 @@
+	.pos 0
+        #TODO:
+        # Initialize %rsp to stack (an address).
+        # By convention, the first two parameters are passed
+        # in %rdi and %rsi.
+        # Initialize %rdi to list.
+        # Initialize %rsi to mem[count].
+        # By convention, a function result is returned in register %rax.
+        # Initialize %rax to 0
+        #
+        # Call your function and halt after returning from function 
+        # In final dump,  %rax should be 0x4d (77)
+
+addpos: #addpos(list, count)
+        # set %rax to the sum of the positive numbers in the list
+        # %rdi is list: the address of the first element in the list
+        # %rsi is count: the number of elements in the list
+        # %rax return value: set to the sum of the positive numbers
+        #TODO:
+        # You will need a loop.
+	# Read number from list. Add it to %rax if it is positive.
+	# Return when the end of list is reached.
+
+	# The data
+	.pos 0x200
+count:  .quad 0xa
+list:	.quad -2
+	.quad 4
+	.quad 5
+	.quad -23
+	.quad 17
+	.quad 22
+	.quad -11
+	.quad 8
+	.quad 9
+	.quad 12
+	.pos 0x300
+stack:  .quad 0
